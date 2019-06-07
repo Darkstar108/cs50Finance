@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Cash Balance</th>
+            <th scope="col">Total Value of Holdings</th>
+            <th scope="col">Grand Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ username }}</td>
+            <td>${{ cash }}</td>
+            <td>${{ total }}</td>
+            <td>${{ total+cash }}</td>
+        </tr>
+    </tbody>
+</table>
+{% if rows != 0 %}
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Number of Shares</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">Value of Holding</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+        <tr>
+            <td>{{ row["symbol"] }}</td>
+            <td>{{ names[loop.index0] }}</td>
+            <td>{{ row["shares"] }}</td>
+            <td>${{ cur_price[loop.index0] }}</td>
+            <td>${{ value[loop.index0] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
